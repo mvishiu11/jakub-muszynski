@@ -15,9 +15,9 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { Toast, ToastDescription, ToastTitle, ToastProvider, ToastViewport } from "@/components/ui/toast"
+import { Toast, ToastDescription, ToastTitle, ToastClose, ToastProvider, ToastViewport } from "@/components/ui/toast"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Github, Linkedin, Mail } from "lucide-react"
+import { Github, Linkedin, Mail, X } from "lucide-react"
 import { useState } from "react"
 
 const formSchema = z.object({
@@ -108,12 +108,15 @@ export function Page() {
                   )}
                 />
                 <Button type="submit">Send Message</Button>
-              </form>
-              <Toast open={open} onOpenChange={setOpen}>
+                <ToastViewport
+                  className="absolute bottom-full mb-4 w-full max-w-md left-1/2 transform -translate-x-1/2"
+                />
+                <Toast open={open} onOpenChange={setOpen}>
                 <ToastTitle>Message sent!</ToastTitle>
                 <ToastDescription>Thank you for your message. I'll get back to you soon.</ToastDescription>
+                <ToastClose>X</ToastClose>
               </Toast>
-              <ToastViewport />
+              </form>
             </ToastProvider>
             </Form>
           </CardContent>
