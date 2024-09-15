@@ -25,7 +25,7 @@ export function ProjectPage() {
       >
         <h1 className="text-4xl font-bold">My Projects</h1>
         <p className="text-xl">
-          From crafting interpreters to AI-driven neural networks, here's a
+          From crafting interpreters to AI-driven neural networks, here&apos;s a
           collection of my work.
         </p>
       </motion.section>

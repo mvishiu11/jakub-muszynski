@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -73,7 +72,7 @@ export function ContactPage() {
           <Card>
             <CardHeader>
               <CardTitle>Contact Form</CardTitle>
-              <CardDescription>Fill out the form below and I'll get back to you as soon as possible.</CardDescription>
+              <CardDescription>Fill out the form below and I&apos;ll get back to you as soon as possible.</CardDescription>
             </CardHeader>
             <CardContent>
               <Form {...form}>
@@ -124,7 +123,7 @@ export function ContactPage() {
                 />
                 <Toast variant="destructive" open={open} onOpenChange={setOpen}>
                 <ToastTitle>Message sent!</ToastTitle>
-                <ToastDescription>Thank you for your message. I'll get back to you soon.</ToastDescription>
+                <ToastDescription>Thank you for your message. I&apos;ll get back to you soon.</ToastDescription>
                 <ToastClose><X /></ToastClose>
               </Toast>
                 </form>

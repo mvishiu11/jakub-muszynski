@@ -24,7 +24,7 @@ export function AboutPage() {
         />
         <h1 className="text-4xl font-bold">About Me</h1>
         <p className="text-xl max-w-2xl mx-auto">
-          I'm a passionate engineer and entrepreneur with a focus on AI, machine learning, and systems programming. 
+          I&apos;m a passionate engineer and entrepreneur with a focus on AI, machine learning, and systems programming. 
           My journey in tech has led me from writing low-level systems code to developing state-of-the-art AI models.
         </p>
       </motion.section>
