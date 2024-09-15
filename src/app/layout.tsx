@@ -25,8 +25,7 @@ export default function RootLayout({
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
+          enableSystem={true} 
         >
           <div className="flex flex-col min-h-screen">
             <header className="container mx-auto px-4 py-6 flex justify-between items-center">

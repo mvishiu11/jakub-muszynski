@@ -7,12 +7,22 @@ import Image from "next/image"
 import { motion } from "framer-motion"
 import { useTheme } from "next-themes"
 import { GitHubActivity, WakaTimeStats, CustomGitHubStats, WakaTimeLang, WakaTimeTime} from "@/components/stats"
+import { useEffect, useState } from 'react';
 
 const githubToken = process.env.NEXT_PUBLIC_GITHUB_TOKEN;
 
 export function HomePage() {
   const { theme } = useTheme();
-  const statsTheme = theme === 'dark' ? 'dark' : 'light';
+
+  const [statsTheme, setStatsTheme] = useState<'dark' | 'light'>('light');
+  useEffect(() => {
+    if (theme === 'system') {
+      const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      setStatsTheme(systemPrefersDark ? 'dark' : 'light');
+    } else {
+      setStatsTheme(theme === 'dark' ? 'dark' : 'light');
+    }
+  }, [theme]);
   
   return (
     <div className="container mx-auto px-4 py-12 space-y-12">

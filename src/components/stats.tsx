@@ -57,6 +57,16 @@ const customTheme = {
 
 export function WakaTimeStats() {
     const { theme } = useTheme();
+
+    const [statsTheme, setStatsTheme] = useState<'dark' | 'light'>('light');
+    useEffect(() => {
+      if (theme === 'system') {
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        setStatsTheme(systemPrefersDark ? 'dark' : 'light');
+      } else {
+        setStatsTheme(theme === 'dark' ? 'dark' : 'light');
+      }
+    }, [theme]);
   
     const wakaLightTime = "https://wakatime.com/share/@cadf71c9-8aae-41b2-984d-0ff534882753/027976c3-01fe-4865-96cc-66f498e4ab97.svg";
     const wakaLightLang = "https://wakatime.com/share/@cadf71c9-8aae-41b2-984d-0ff534882753/ba9b2cb1-4051-4500-9ea8-0bcf10267b45.svg";
@@ -64,8 +74,8 @@ export function WakaTimeStats() {
     const wakaDarkTime = "https://wakatime.com/share/@cadf71c9-8aae-41b2-984d-0ff534882753/8c75cc60-bb8c-4c90-a292-eb084d97e14c.svg";
     const wakaDarkLang = "https://wakatime.com/share/@cadf71c9-8aae-41b2-984d-0ff534882753/80ce0d0e-b5a4-4f0f-9f9f-e035fd0e350b.svg";
   
-    const embed1 = theme === "dark" ? wakaDarkTime : wakaLightTime;
-    const embed2 = theme === "dark" ? wakaDarkLang : wakaLightLang;
+    const embed1 = statsTheme === "dark" ? wakaDarkTime : wakaLightTime;
+    const embed2 = statsTheme === "dark" ? wakaDarkLang : wakaLightLang;
   
     return (
       <Card>
@@ -86,14 +96,22 @@ export function WakaTimeStats() {
 
   export function WakaTimeTime() {
     const { theme } = useTheme();
+
+    const [statsTheme, setStatsTheme] = useState<'dark' | 'light'>('light');
+    useEffect(() => {
+      if (theme === 'system') {
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        setStatsTheme(systemPrefersDark ? 'dark' : 'light');
+      } else {
+        setStatsTheme(theme === 'dark' ? 'dark' : 'light');
+      }
+    }, [theme]);
   
-    // Define URLs for both light and dark modes
     const wakaLightTime = "https://wakatime.com/share/@cadf71c9-8aae-41b2-984d-0ff534882753/027976c3-01fe-4865-96cc-66f498e4ab97.svg";
     
     const wakaDarkTime = "https://wakatime.com/share/@cadf71c9-8aae-41b2-984d-0ff534882753/8c75cc60-bb8c-4c90-a292-eb084d97e14c.svg";
   
-    // Use theme to conditionally select the appropriate URLs
-    const embed = theme === "dark" ? wakaDarkTime : wakaLightTime;
+    const embed = statsTheme === "dark" ? wakaDarkTime : wakaLightTime;
   
     return (
       <Card>
@@ -111,11 +129,21 @@ export function WakaTimeStats() {
 
   export function WakaTimeLang() {
     const { theme } = useTheme();
+
+    const [statsTheme, setStatsTheme] = useState<'dark' | 'light'>('light');
+    useEffect(() => {
+      if (theme === 'system') {
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        setStatsTheme(systemPrefersDark ? 'dark' : 'light');
+      } else {
+        setStatsTheme(theme === 'dark' ? 'dark' : 'light');
+      }
+    }, [theme]);
   
     const wakaLightLang = "https://wakatime.com/share/@cadf71c9-8aae-41b2-984d-0ff534882753/ba9b2cb1-4051-4500-9ea8-0bcf10267b45.svg";
     const wakaDarkLang = "https://wakatime.com/share/@cadf71c9-8aae-41b2-984d-0ff534882753/80ce0d0e-b5a4-4f0f-9f9f-e035fd0e350b.svg";
   
-    const embed = theme === "dark" ? wakaDarkLang : wakaLightLang;
+    const embed = statsTheme === "dark" ? wakaDarkLang : wakaLightLang;
   
     return (
       <Card>
