@@ -3,10 +3,9 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import Link from "next/link"
-import Image from "next/image"
 import { motion } from "framer-motion"
 import { useTheme } from "next-themes"
-import { GitHubActivity, WakaTimeStats, CustomGitHubStats} from "@/components/stats"
+import { GitHubActivity, WakaTimeStats, CustomGitHubStats, WakaTimeLang} from "@/components/stats"
 
 const githubToken = process.env.NEXT_PUBLIC_GITHUB_TOKEN;
 
@@ -40,7 +39,7 @@ export function HomePage() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, staggerChildren: 0.2 }}
       >
-        {/* GitHub Stats - Shown on both mobile and desktop */}
+        {/* GitHub Stats - Shown on desktop */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -76,11 +75,22 @@ export function HomePage() {
           </Card>
         </motion.div>
 
-        {/* WakaTime Stats - Hidden on mobile, shown on desktop */}
+        {/* WakaTime Lang - Hidden on mobile, shown on desktop */}
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
+          className="hidden md:block"
+        >
+          <WakaTimeLang />
+        </motion.div>
+
+        {/* WakaTime Stats - Hidden on desktop, shown on mobile */}
+        <motion.div
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+          className="block md:hidden"
         >
           <WakaTimeStats />
         </motion.div>
