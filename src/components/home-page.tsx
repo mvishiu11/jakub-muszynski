@@ -56,7 +56,7 @@ export function HomePage() {
                 <GitHubActivity />
                 <CustomGitHubStats />
 
-                <Image 
+                <img
                   src={`https://github-readme-stats.vercel.app/api?username=mvishiu11&show_icons=true&theme=${statsTheme}&cache_seconds=1800&token=${githubToken}`}
                   alt="GitHub stats" 
                   width={500} 
@@ -64,7 +64,7 @@ export function HomePage() {
                   className="w-full h-auto"
                 />
 
-                <Image 
+                <img
                   src={`https://github-readme-stats.vercel.app/api/top-langs/?username=mvishiu11&layout=compact&theme=${statsTheme}&cache_seconds=1800&token=${githubToken}`}
                   alt="GitHub languages" 
                   width={500} 
