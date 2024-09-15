@@ -11,9 +11,15 @@ export function Page() {
       <section className="text-center space-y-4">
         <h1 className="text-4xl font-bold">Engineering Excellence, Business Strategy, AI Mastery</h1>
         <p className="text-xl">Blending technology, business, and research to create impactful solutions.</p>
-        <Link href="/projects" passHref>
-          <Button size="lg">Explore My Projects</Button>
+        
+         <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
+        <Link href="/about" passHref>
+          <Button variant="secondary" size="lg">Learn More About Me</Button>
         </Link>
+        <Link href="/projects" passHref>
+          <Button variant="secondary" size="lg">Explore My Projects</Button>
+        </Link>
+        </div>
       </section>
 
       {/* Stats Section */}
