@@ -9,6 +9,9 @@ import { Button } from "@/components/ui/button";
 export const metadata: Metadata = {
   title: "Jakub Muszynski - Personal Website",
   description: "Personal website of Jakub Muszynski, a software engineer based in Warsaw.",
+  icons: {
+    icon: "/personal_logo.png",
+  },
 };
 
 export default function RootLayout({

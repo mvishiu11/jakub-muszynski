@@ -58,7 +58,7 @@ export function ProjectPage() {
             <Card className="flex flex-col h-full">
               <CardHeader>
                 <CardTitle>{project.title}</CardTitle>
-              </CardHeader>S
+              </CardHeader>
               <CardContent className="flex-grow">
                 <p>{project.description}</p>
                 <div className="mt-4 flex flex-wrap gap-2">
