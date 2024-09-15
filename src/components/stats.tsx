@@ -60,42 +60,95 @@ export function WakaTimeStats() {
 
   export function CustomGitHubStats() {
     return (
-      <Card>
+      <Card className="shadow-lg rounded-md">
         <CardHeader>
           <CardTitle>GitHub Stats</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="space-y-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {/* GitHub Stars */}
-            <img
-              src="https://img.shields.io/github/stars/mvishiu11?style=social"
-              alt="GitHub Stars"
-              className="w-full"
-            />
+            <a
+              href="https://github.com/mvishiu11?tab=repositories"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block"
+            >
+              <img
+                src="https://img.shields.io/github/stars/mvishiu11?style=flat-square&logo=github&label=Stars&color=blue"
+                alt="GitHub Stars"
+                className="hover:opacity-80 transition-opacity duration-300 w-full"
+              />
+            </a>
+  
             {/* GitHub Followers */}
-            <img
-              src="https://img.shields.io/github/followers/mvishiu11?style=social"
-              alt="GitHub Followers"
-              className="w-full"
-            />
+            <a
+              href="https://github.com/mvishiu11?tab=followers"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block"
+            >
+              <img
+                src="https://img.shields.io/github/followers/mvishiu11?style=flat-square&logo=github&label=Followers&color=green"
+                alt="GitHub Followers"
+                className="hover:opacity-80 transition-opacity duration-300 w-full"
+              />
+            </a>
+  
             {/* GitHub Forks */}
-            <img
-              src="https://img.shields.io/github/forks/mvishiu11/rustylox?style=social"
-              alt="GitHub Forks"
-              className="w-full"
-            />
+            <a
+              href="https://github.com/mvishiu11/rustylox"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block"
+            >
+              <img
+                src="https://img.shields.io/github/forks/mvishiu11/rustylox?style=flat-square&logo=github&label=Forks&color=orange"
+                alt="GitHub Forks"
+                className="hover:opacity-80 transition-opacity duration-300 w-full"
+              />
+            </a>
+  
             {/* GitHub Last Commit */}
-            <img
-              src="https://img.shields.io/github/last-commit/mvishiu11/rustylox?style=flat"
-              alt="GitHub Last Commit"
-              className="w-full"
-            />
-            {/* GitHub Issues */}
-            <img
-              src="https://img.shields.io/github/issues/mvishiu11/rustylox"
-              alt="GitHub Issues"
-              className="w-full"
-            />
+            <a
+              href="https://github.com/mvishiu11/rustylox"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block"
+            >
+              <img
+                src="https://img.shields.io/github/last-commit/mvishiu11/rustylox?style=flat-square&logo=github&label=Last%20Commit&color=purple"
+                alt="GitHub Last Commit"
+                className="hover:opacity-80 transition-opacity duration-300 w-full"
+              />
+            </a>
+  
+            {/* GitHub Open Issues */}
+            <a
+              href="https://github.com/mvishiu11/rustylox/issues"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block"
+            >
+              <img
+                src="https://img.shields.io/github/issues/mvishiu11/rustylox?style=flat-square&logo=github&label=Open%20Issues&color=red"
+                alt="GitHub Open Issues"
+                className="hover:opacity-80 transition-opacity duration-300 w-full"
+              />
+            </a>
+  
+            {/* GitHub Pull Requests */}
+            <a
+              href="https://github.com/mvishiu11/rustylox/pulls"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block"
+            >
+              <img
+                src="https://img.shields.io/github/issues-pr/mvishiu11/rustylox?style=flat-square&logo=github&label=Pull%20Requests&color=yellow"
+                alt="GitHub Pull Requests"
+                className="hover:opacity-80 transition-opacity duration-300 w-full"
+              />
+            </a>
           </div>
         </CardContent>
       </Card>
