@@ -107,16 +107,15 @@ export function WakaTimeStats() {
       }
     }, [theme]);
   
-    const wakaLightTime = "https://wakatime.com/share/@cadf71c9-8aae-41b2-984d-0ff534882753/027976c3-01fe-4865-96cc-66f498e4ab97.svg";
-    
-    const wakaDarkTime = "https://wakatime.com/share/@cadf71c9-8aae-41b2-984d-0ff534882753/8c75cc60-bb8c-4c90-a292-eb084d97e14c.svg";
+    const wakaLightTime = "https://wakatime.com/share/@cadf71c9-8aae-41b2-984d-0ff534882753/f3c76238-5e65-4d87-b7db-15d0a0c073f5.svg";
+    const wakaDarkTime = "https://wakatime.com/share/@cadf71c9-8aae-41b2-984d-0ff534882753/64970ee7-d512-445f-b58f-effaa5394adf.svg";
   
     const embed = statsTheme === "dark" ? wakaDarkTime : wakaLightTime;
   
     return (
       <Card>
         <CardHeader>
-          <CardTitle>WakaTime Stats</CardTitle>
+          <CardTitle>WakaTime Time (over last 30 days)</CardTitle>
         </CardHeader>
         <CardContent>
           <div>
@@ -140,15 +139,15 @@ export function WakaTimeStats() {
       }
     }, [theme]);
   
-    const wakaLightLang = "https://wakatime.com/share/@cadf71c9-8aae-41b2-984d-0ff534882753/ba9b2cb1-4051-4500-9ea8-0bcf10267b45.svg";
-    const wakaDarkLang = "https://wakatime.com/share/@cadf71c9-8aae-41b2-984d-0ff534882753/80ce0d0e-b5a4-4f0f-9f9f-e035fd0e350b.svg";
+    const wakaLightLang = "https://wakatime.com/share/@cadf71c9-8aae-41b2-984d-0ff534882753/b68acdab-63e1-4735-8709-345b05f5b562.svg";
+    const wakaDarkLang = "https://wakatime.com/share/@cadf71c9-8aae-41b2-984d-0ff534882753/f0a51492-769f-4baf-804d-0ef8e7bef850.svg";
   
     const embed = statsTheme === "dark" ? wakaDarkLang : wakaLightLang;
   
     return (
       <Card>
         <CardHeader>
-          <CardTitle>WakaTime Stats</CardTitle>
+          <CardTitle>WakaTime Languages</CardTitle>
         </CardHeader>
         <CardContent>
           <div>
