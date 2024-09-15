@@ -66,7 +66,7 @@ export default function RootLayout({
               {children}
             </main>
             <footer className="container mx-auto px-4 py-6 flex justify-between items-center">
-              <div>© {new Date().getFullYear()} Your Name</div>
+              <div>© {new Date().getFullYear()} Jakub Muszynski</div>
               <div className="space-x-4">
                 <a href="https://linkedin.com/in/jakub-muszyński-51133a273" target="_blank" rel="noopener noreferrer">LinkedIn</a>
                 <a href="https://github.com/mvishiu11" target="_blank" rel="noopener noreferrer">GitHub</a>

@@ -1,7 +1,7 @@
-import { Page as ProjectDetsPage } from '@/components/project-details-page';
+import { ProjectDetailsPage } from '@/components/project-details-page';
 
 export default function Project() {
   return (
-    <ProjectDetsPage />
+    <ProjectDetailsPage />
   );
 }
