@@ -6,7 +6,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { motion } from "framer-motion"
 import { useTheme } from "next-themes"
-import { GitHubActivity, WakaTimeStats } from "@/components/stats"
+import { GitHubActivity, WakaTimeStats, CustomGitHubStats} from "@/components/stats"
 
 const githubToken = process.env.NEXT_PUBLIC_GITHUB_TOKEN;
 
@@ -54,6 +54,7 @@ export function HomePage() {
             <CardContent>
               <div className="space-y-4">
                 <GitHubActivity />
+                <CustomGitHubStats />
 
                 <Image 
                   src={`https://github-readme-stats.vercel.app/api?username=mvishiu11&show_icons=true&theme=${statsTheme}&cache_seconds=1800&token=${githubToken}`}

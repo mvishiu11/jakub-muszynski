@@ -1,11 +1,58 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { useTheme } from "next-themes"
 import GitHubCalendar from 'react-github-calendar';
+import { useEffect, useState } from 'react';
+import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
+import { FaCodeBranch, FaClock, FaCheckCircle } from 'react-icons/fa';
 
+const GITHUB_TOKEN = process.env.NEXT_PUBLIC_GITHUB_TOKEN;
+
+const client = new ApolloClient({
+  uri: 'https://api.github.com/graphql',
+  headers: {
+    Authorization: `Bearer ${GITHUB_TOKEN}`,
+  },
+  cache: new InMemoryCache(),
+});
+
+type LanguageEdge = {
+    size: number;
+    node: {
+      name: string;
+      color: string;
+    };
+  };
+  
+  type RepositoryNode = {
+    name: string;
+    languages: {
+      edges: LanguageEdge[];
+    };
+    defaultBranchRef: {
+      target: {
+        history: {
+          totalCount: number;
+        };
+        committedDate: string;
+      };
+    };
+  };
+  
+  type GitHubStatsResponse = {
+    viewer: {
+      repositories: {
+        nodes: RepositoryNode[];
+      };
+      contributionsCollection: {
+        totalRepositoryContributions: number;
+      };
+    };
+  };
+  
 
 const customTheme = {
-    light: ['#ebedf0', '#c6e48b', '#7bc96f', '#239a3b', '#196127'], // light theme color
-    dark: ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'],  // dark theme color
+    light: ['#ebedf0', '#c6e48b', '#7bc96f', '#239a3b', '#196127'],
+    dark: ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'],
   };
 
 export function WakaTimeStats() {
@@ -40,9 +87,9 @@ export function WakaTimeStats() {
   }
   
   export function GitHubActivity() {
-    const blockSize = "block md:block lg:block" ? 12 : 6;
-    const blockMargin = "block md:block lg:block" ? 3 : 2;
-    const fontSize = "block md:block lg:block" ? 14 : 10;
+    const blockSize = 12;
+    const blockMargin = 3;
+    const fontSize = 14;
   
     return (
       <div className="activity-table">
@@ -59,98 +106,108 @@ export function WakaTimeStats() {
   }
 
   export function CustomGitHubStats() {
+    const [stats, setStats] = useState({
+      totalCommits: 0,
+      totalRepositories: 0,
+      lastCommitDate: '',
+    });
+  
+    useEffect(() => {
+      async function fetchGitHubStats() {
+        const { data } = await client.query<GitHubStatsResponse>({
+          query: gql`
+            query {
+              viewer {
+                repositories(first: 100) {
+                  nodes {
+                    name
+                    languages(first: 10) {
+                      edges {
+                        size
+                        node {
+                          name
+                          color
+                        }
+                      }
+                    }
+                    defaultBranchRef {
+                      target {
+                        ... on Commit {
+                          history(first: 0) {
+                            totalCount
+                          }
+                          committedDate
+                        }
+                      }
+                    }
+                  }
+                }
+                contributionsCollection {
+                  totalRepositoryContributions
+                }
+              }
+            }
+          `,
+        });
+  
+        const repos = data.viewer.repositories.nodes;
+        let totalCommits = 0;
+        let lastCommitDate = new Date(0);
+  
+        // Calculate total commits and find the most recent commit date
+        repos.forEach((repo: RepositoryNode) => {
+          const repoCommits = repo.defaultBranchRef?.target?.history?.totalCount || 0;
+          totalCommits += repoCommits;
+  
+          const repoLastCommitDate = new Date(repo.defaultBranchRef?.target?.committedDate);
+          if (repoLastCommitDate > lastCommitDate) {
+            lastCommitDate = repoLastCommitDate;
+          }
+        });
+  
+        setStats({
+          totalCommits,
+          totalRepositories: data.viewer.contributionsCollection.totalRepositoryContributions,
+          lastCommitDate: lastCommitDate.toLocaleDateString(),
+        });
+      }
+  
+      fetchGitHubStats();
+    }, []);
+  
     return (
-      <Card className="shadow-lg rounded-md">
-        <CardHeader>
-          <CardTitle>GitHub Stats</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {/* GitHub Stars */}
-            <a
-              href="https://github.com/mvishiu11?tab=repositories"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block"
-            >
-              <img
-                src="https://img.shields.io/github/stars/mvishiu11?style=flat-square&logo=github&label=Stars&color=blue"
-                alt="GitHub Stars"
-                className="hover:opacity-80 transition-opacity duration-300 w-full"
-              />
-            </a>
-  
-            {/* GitHub Followers */}
-            <a
-              href="https://github.com/mvishiu11?tab=followers"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block"
-            >
-              <img
-                src="https://img.shields.io/github/followers/mvishiu11?style=flat-square&logo=github&label=Followers&color=green"
-                alt="GitHub Followers"
-                className="hover:opacity-80 transition-opacity duration-300 w-full"
-              />
-            </a>
-  
-            {/* GitHub Forks */}
-            <a
-              href="https://github.com/mvishiu11/rustylox"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block"
-            >
-              <img
-                src="https://img.shields.io/github/forks/mvishiu11/rustylox?style=flat-square&logo=github&label=Forks&color=orange"
-                alt="GitHub Forks"
-                className="hover:opacity-80 transition-opacity duration-300 w-full"
-              />
-            </a>
-  
-            {/* GitHub Last Commit */}
-            <a
-              href="https://github.com/mvishiu11/rustylox"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block"
-            >
-              <img
-                src="https://img.shields.io/github/last-commit/mvishiu11/rustylox?style=flat-square&logo=github&label=Last%20Commit&color=purple"
-                alt="GitHub Last Commit"
-                className="hover:opacity-80 transition-opacity duration-300 w-full"
-              />
-            </a>
-  
-            {/* GitHub Open Issues */}
-            <a
-              href="https://github.com/mvishiu11/rustylox/issues"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block"
-            >
-              <img
-                src="https://img.shields.io/github/issues/mvishiu11/rustylox?style=flat-square&logo=github&label=Open%20Issues&color=red"
-                alt="GitHub Open Issues"
-                className="hover:opacity-80 transition-opacity duration-300 w-full"
-              />
-            </a>
-  
-            {/* GitHub Pull Requests */}
-            <a
-              href="https://github.com/mvishiu11/rustylox/pulls"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block"
-            >
-              <img
-                src="https://img.shields.io/github/issues-pr/mvishiu11/rustylox?style=flat-square&logo=github&label=Pull%20Requests&color=yellow"
-                alt="GitHub Pull Requests"
-                className="hover:opacity-80 transition-opacity duration-300 w-full"
-              />
-            </a>
+      <div className="bg-gradient-to-r from-blue-50 to-blue-100 dark:from-gray-800 dark:to-gray-900 p-6 rounded-lg shadow-lg">
+        <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-4 text-center">GitHub Contribution Stats</h3>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          {/* Total Commits */}
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 flex items-center">
+            <FaCodeBranch className="text-blue-500 dark:text-blue-300 w-8 h-8 mr-4" />
+            <div>
+              <p className="text-lg font-semibold text-gray-700 dark:text-gray-300">Total Commits</p>
+              <p className="text-xl text-blue-600 dark:text-blue-400 font-bold">{stats.totalCommits.toLocaleString()}</p>
+            </div>
           </div>
-        </CardContent>
-      </Card>
+          
+          {/* Repositories Contributed To */}
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 flex items-center">
+            <FaCheckCircle className="text-green-500 dark:text-green-300 w-8 h-8 mr-4" />
+            <div>
+              <p className="text-lg font-semibold text-gray-700 dark:text-gray-300">Repos Contributed To</p>
+              <p className="text-xl text-green-600 dark:text-green-400 font-bold">{stats.totalRepositories}</p>
+            </div>
+          </div>
+          
+          {/* Last Commit Date */}
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 flex items-center">
+            <FaClock className="text-purple-500 dark:text-purple-300 w-8 h-8 mr-4" />
+            <div>
+              <p className="text-lg font-semibold text-gray-700 dark:text-gray-300">Last Commit Date</p>
+              <p className="text-xl text-purple-600 dark:text-purple-400 font-bold">{stats.lastCommitDate}</p>
+            </div>
+          </div>
+        </div>
+      </div>
     );
   }
