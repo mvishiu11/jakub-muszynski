@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import Link from "next/link"
+import Image from "next/image"
 import { motion } from "framer-motion"
 import { useTheme } from "next-themes"
 import { GitHubActivity, WakaTimeStats, CustomGitHubStats, WakaTimeLang, WakaTimeTime} from "@/components/stats"
@@ -55,20 +56,22 @@ export function HomePage() {
                 <GitHubActivity />
                 <CustomGitHubStats />
 
-                <img
+                <Image
                   src={`https://github-readme-stats.vercel.app/api?username=mvishiu11&show_icons=true&theme=${statsTheme}&cache_seconds=1800&token=${githubToken}`}
                   alt="GitHub stats" 
                   width={500} 
                   height={200}
                   className="w-full h-auto"
+                  unoptimized
                 />
 
-                <img
+                <Image
                   src={`https://github-readme-stats.vercel.app/api/top-langs/?username=mvishiu11&layout=compact&theme=${statsTheme}&cache_seconds=1800&token=${githubToken}`}
                   alt="GitHub languages" 
                   width={500} 
                   height={200}
                   className="w-full h-auto"
+                  unoptimized
                 />
               </div>
             </CardContent>

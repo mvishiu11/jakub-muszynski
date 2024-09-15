@@ -9,8 +9,7 @@ const nextConfig = {
           pathname: '/**',
         },
       ],
-      dangerouslyAllowSVG: true,  // Enable SVG support
-      contentSecurityPolicy: "default-src 'self'; img-src 'self' https://github-readme-stats.vercel.app; script-src 'none'; sandbox;" // Add a content security policy for safety
+      dangerouslyAllowSVG: true,
     },
   };
   
