@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { useTheme } from "next-themes"
-import { GitHubActivity, WakaTimeStats, CustomGitHubStats, WakaTimeLang} from "@/components/stats"
+import { GitHubActivity, WakaTimeStats, CustomGitHubStats, WakaTimeLang, WakaTimeTime} from "@/components/stats"
 
 const githubToken = process.env.NEXT_PUBLIC_GITHUB_TOKEN;
 
@@ -83,6 +83,7 @@ export function HomePage() {
           className="hidden md:block"
         >
           <WakaTimeLang />
+          <WakaTimeTime />
         </motion.div>
 
         {/* WakaTime Stats - Hidden on desktop, shown on mobile */}
