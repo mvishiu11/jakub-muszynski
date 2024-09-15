@@ -3,7 +3,29 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import Link from "next/link"
+import Image from "next/image"
 import { motion } from "framer-motion"
+import GitHubCalendar from 'react-github-calendar';
+
+const customTheme = {
+  light: ['#ebedf0', '#c6e48b', '#7bc96f', '#239a3b', '#196127'], // light theme color
+  dark: ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'],  // dark theme color
+};
+
+export default function GitHubActivity() {
+  return (
+    <div className="activity-table">
+      <h2>GitHub Activity</h2>
+      <GitHubCalendar 
+        username="mvishiu11"
+        theme={customTheme}
+        blockMargin={2}
+        blockSize={15}
+        fontSize={14}
+      />
+    </div>
+  );
+}
 
 export function HomePage() {
   return (
@@ -42,8 +64,23 @@ export function HomePage() {
               <CardTitle>GitHub Stats</CardTitle>
             </CardHeader>
             <CardContent>
-              <p>Contributions in the last year: 500</p>
-              <p>Projects worked on: 10</p>
+            <div className="space-y-4">
+              <GitHubActivity />
+
+              <Image 
+                src="https://github-readme-stats.vercel.app/api?username=mvishiu11&show_icons=true&theme=radical"
+                alt="GitHub stats" 
+                width={500} 
+                height={200} 
+              />
+
+              <Image 
+                src="https://github-readme-stats.vercel.app/api/top-langs/?username=ergo&layout=compact&theme=radical"
+                alt="GitHub langugages" 
+                width={500} 
+                height={200} 
+              />
+            </div>
             </CardContent>
           </Card>
         </motion.div>
@@ -57,8 +94,8 @@ export function HomePage() {
               <CardTitle>WakaTime Stats</CardTitle>
             </CardHeader>
             <CardContent>
-              <p>Time spent coding: 1000 hours</p>
-              <p>Most used language: Python</p>
+              <figure><embed src="https://wakatime.com/share/@cadf71c9-8aae-41b2-984d-0ff534882753/027976c3-01fe-4865-96cc-66f498e4ab97.svg"></embed></figure>
+              <figure><embed src="https://wakatime.com/share/@cadf71c9-8aae-41b2-984d-0ff534882753/ba9b2cb1-4051-4500-9ea8-0bcf10267b45.svg"></embed></figure>
             </CardContent>
           </Card>
         </motion.div>
