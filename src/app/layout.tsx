@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import { ModeToggle } from "@/components/mode-toggle"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
+import { ModeToggle } from "@/components/mode-toggle";
+import Link from "next/link";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -39,7 +40,11 @@ export default function RootLayout({
           <div className="flex flex-col min-h-screen">
             <header className="container mx-auto px-4 py-6 flex justify-between items-center">
               <Link href="/" className="text-2xl font-bold">
-                Your Logo
+                <Image src="/personal_logo.png" 
+                       alt="Logo" 
+                       width={75} 
+                       height={75}
+                       className="rounded-full mx-auto" />
               </Link>
               <nav className="flex items-center space-x-4">
                 <Link href="/" passHref>
