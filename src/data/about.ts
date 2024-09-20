@@ -1,34 +1,41 @@
 export const skills = [
     { name: "Python", level: "Expert" },
+    { name: "AI/ML", level: "Advanced" },
+    { name: "C/C++", level: "Advanced" },
     { name: "Rust", level: "Intermediate" },
-    { name: "AI/ML", level: "Expert" },
     { name: "React", level: "Advanced" },
-    { name: "Node.js", level: "Advanced" }
+    { name: "Next.js", level: "Intermediate" }
   ]
   
 export const careerJourney = [
     {
+      year: "2024",
+      title: "Software/AI Engineer",
+      company: "Taiwan Semiconductor Manufacturing Company (TSMC) | AI Application & Integration Division",
+      description: "Worked with state-of-the-art LLM inference methods and cutting-edge GPUs for AI acceleration. Developed agent-based systems for defect engineering"
+    },
+    {
       year: "2023",
-      title: "Senior AI Engineer",
-      company: "TechCorp Inc.",
-      description: "Leading AI initiatives and developing cutting-edge machine learning models."
+      title: "Founder",
+      company: "MedWave",
+      description: "Co-founded an AI startup focusing on AI-driven healthcare solutions, currently in CINN incubator at WUT"
     },
     {
-      year: "2021",
-      title: "Co-founder",
-      company: "AI Startup",
-      description: "Co-founded an AI startup focusing on natural language processing solutions."
+      year: "2023",
+      title: "Project Leader",
+      company: "Data Science Student CLub WUT",
+      description: "Co-lead a project of an autonomous drone in cooperation with KNR WUT"
     },
     {
-      year: "2019",
-      title: "Software Engineer",
-      company: "Web Solutions Ltd.",
-      description: "Developed scalable web applications using React and Node.js."
+      year: "2022",
+      title: "AI Engineer && Team Lead",
+      company: "ADeK Science Club WUT",
+      description: "Worked on ADAS systems and led a team of engineers in developing AI models for autonomous driving"
     },
     {
-      year: "2017",
-      title: "Computer Science Degree",
-      company: "Tech University",
-      description: "Graduated with honors, specializing in artificial intelligence and machine learning."
+      year: "2022",
+      title: "Start of the Computer Science and Information Systems Degree",
+      company: "Warsaw University of Technology",
+      description: "Started my journey in tech by pursuing a degree in computer science and information systems at WUT"
     }
   ]
