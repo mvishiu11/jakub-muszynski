@@ -26,7 +26,7 @@ async function getProjects(): Promise<Project[]> {
     }
   });
 
-  mergedProjects.sort((a, b) => (a.manual === "yes" ? -1 : 1));
+  mergedProjects.sort((a) => (a.manual === "yes" ? -1 : 1));
 
   return mergedProjects;
 }

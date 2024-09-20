@@ -15,7 +15,7 @@ export const projects = [
       category: "Languages",
       githubLink: "https://github.com/mvishiu11/RustyLox",
       demoLink: "https://mvishiu11.github.io/rustylox-playground/",
-      manual: "yes",
+      manual: "yes" as const,
     },
     {
       id: 2,
@@ -31,7 +31,7 @@ export const projects = [
       githubLink: "https://github.com/mvishiu11/jakub-muszynski",
       demoLink: null,
       category: "Web Development",
-      manual: "yes",
+      manual: "yes" as const,
     },
     // Add more projects as needed
   ];

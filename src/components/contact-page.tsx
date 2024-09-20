@@ -149,16 +149,8 @@ export function ContactPage() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Mail className="h-5 w-5" />
-                <a href="mailto:your.email@example.com" className="hover:underline">your.email@example.com</a>
-              </motion.div>
-              <motion.div 
-                className="flex items-center space-x-2"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
                 <Linkedin className="h-5 w-5" />
-                <a href="https://www.linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer" className="hover:underline">LinkedIn Profile</a>
+                <a href="https://linkedin.com/in/jakub-muszyński-51133a273" target="_blank" rel="noopener noreferrer" className="hover:underline">LinkedIn Profile</a>
               </motion.div>
               <motion.div 
                 className="flex items-center space-x-2"
@@ -166,7 +158,16 @@ export function ContactPage() {
                 whileTap={{ scale: 0.95 }}
               >
                 <Github className="h-5 w-5" />
-                <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" className="hover:underline">GitHub Profile</a>
+                <a href="https://github.com/mvishiu11" target="_blank" rel="noopener noreferrer" className="hover:underline">GitHub Profile</a>
+              </motion.div>
+
+              <motion.div 
+                className="flex items-center space-x-2"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Mail className="h-5 w-5" />
+                <a href="mailto:jakub.m.muszynski@gmail.com" className="hover:underline">jakub.m.muszynski@gmail.com</a>
               </motion.div>
             </CardContent>
           </Card>

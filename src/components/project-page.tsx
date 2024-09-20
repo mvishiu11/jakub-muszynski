@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { categories } from "@/data/projects";
-import { Project, ProjectsPageProps } from "@/lib/types";
+import { ProjectsPageProps } from "@/lib/types";
 
 export default function ProjectPage({ projects }: ProjectsPageProps) {
   const [selectedCategory, setSelectedCategory] = useState("All");
