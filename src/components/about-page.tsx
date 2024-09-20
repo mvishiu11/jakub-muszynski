@@ -71,7 +71,7 @@ export function AboutPage() {
               transition={{ duration: 0.5, delay: index * 0.2 }}
             >
               <div className="flex flex-col items-center mr-4">
-                <div className="flex items-center justify-center w-8 h-8 bg-primary text-primary-foreground rounded-full">
+                <div className="flex items-center justify-center w-12 h-12 bg-primary text-primary-foreground rounded-full">
                   {event.year}
                 </div>
                 {index < careerJourney.length - 1 && <div className="w-px h-full bg-border" />}
