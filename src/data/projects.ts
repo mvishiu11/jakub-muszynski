@@ -1,4 +1,4 @@
-export const categories = ["All", "Systems", "AI/ML", "Web Development"]
+export const categories = ["All", "Languages", "Systems", "AI/ML", "Web Development", "Miscellaneous"];
 
 export const projects = [
     {
@@ -12,27 +12,13 @@ export const projects = [
         "REPL (Read-Eval-Print Loop) support",
         "Efficient memory management using Rust"
       ],
-      category: "Systems",
+      category: "Languages",
       githubLink: "https://github.com/mvishiu11/RustyLox",
       demoLink: "https://mvishiu11.github.io/rustylox-playground/",
+      manual: "yes",
     },
     {
       id: 2,
-      title: "AI Image Generator",
-      description: "A deep learning model that generates images from text descriptions.",
-      overview: "An AI model that uses neural networks to generate images from textual input.",
-      technologies: ["Python", "PyTorch", "React"],
-      features: [
-        "Text-to-image generation",
-        "Supports multiple styles of image output",
-        "Built-in pre-trained models for quick use"
-      ],
-      category: "AI/ML",
-      githubLink: "https://github.com/yourusername/AIImageGenerator",
-      demoLink: null,
-    },
-    {
-      id: 3,
       title: "Portfolio Website",
       description: "A responsive portfolio website built with Next.js and Tailwind CSS.",
       overview: "A personal website showcasing projects, skills, and contact information.",
@@ -45,6 +31,7 @@ export const projects = [
       githubLink: "https://github.com/mvishiu11/jakub-muszynski",
       demoLink: null,
       category: "Web Development",
+      manual: "yes",
     },
     // Add more projects as needed
   ];

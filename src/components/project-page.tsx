@@ -5,9 +5,10 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { projects, categories } from "@/data/projects";
+import { categories } from "@/data/projects";
+import { Project, ProjectsPageProps } from "@/lib/types";
 
-export function ProjectPage() {
+export default function ProjectPage({ projects }: ProjectsPageProps) {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const filteredProjects =

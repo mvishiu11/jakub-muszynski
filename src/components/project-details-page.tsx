@@ -1,14 +1,14 @@
 'use client'
 
 import { useParams } from "next/navigation"
-import { projects } from "@/data/projects"
+import { ProjectsPageProps } from "@/lib/types"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Github, ExternalLink } from "lucide-react"
 import Link from "next/link"
 
-export function ProjectDetailsPage() {
+export function ProjectDetailsPage({ projects }: ProjectsPageProps) {
   const { id } = useParams();
 
   const project = projects.find((project) => project.id === Number(id));
