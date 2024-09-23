@@ -39,3 +39,9 @@ export type Project = {
 export type ProjectsPageProps = {
     projects: Project[];
   };
+
+export type ContactEmailProps = {
+    message: string;
+    email: string;
+    name: string;
+  };

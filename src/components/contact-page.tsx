@@ -37,18 +37,31 @@ export function ContactPage() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
-      email: "",
       message: "",
+      email: "",
+      name: "",
     },
   })
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // This is where you'd typically send the form data to your backend
-    console.log(values)
-    // Show a success toast
-    setOpen(true);
-    form.reset()
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values),
+      });
+  
+      if (response.ok) {
+        setOpen(true);
+        form.reset();
+      } else {
+        console.error('Failed to send message');
+      }
+    } catch (error) {
+      console.error('Error sending message:', error);
+    }
   }
 
   return (
