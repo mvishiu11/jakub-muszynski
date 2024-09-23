@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { EmailTemplate } from "@/lib/email-template";
 import sendgrid from '@sendgrid/mail';
+import { emailTemplateHtml } from "@/lib/email-template";
 
 sendgrid.setApiKey(process.env.SENDGRID_API_KEY as string);
 
@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
       from: 'jakub.m.muszynski@gmail.com',
       subject: `Contact form submission from ${name}`,
       text: message,
-      react: EmailTemplate({ name, email, message }),
+      html: emailTemplateHtml(name, email, message),
     };
 
     const result = await sendgrid.send(msg);
