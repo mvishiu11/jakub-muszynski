@@ -15,10 +15,9 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { Toast, ToastDescription, ToastTitle, ToastClose, ToastProvider, ToastViewport } from "@/components/ui/toast"
+import { toast } from "@/hooks/use-toast"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Github, Linkedin, Mail, X } from "lucide-react"
-import { useState } from "react"
+import { Github, Linkedin, Mail } from "lucide-react"
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -33,7 +32,6 @@ const formSchema = z.object({
 })
 
 export function ContactPage() {
-  const [open, setOpen] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -56,7 +54,6 @@ export function ContactPage() {
       });
   
       if (response.ok) {
-        setOpen(true);
         form.reset();
       } else {
         console.error('Failed to send message');
@@ -91,7 +88,6 @@ export function ContactPage() {
             </CardHeader>
             <CardContent>
               <Form {...form}>
-            <ToastProvider>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                   <FormField
                     control={form.control}
@@ -132,17 +128,13 @@ export function ContactPage() {
                       </FormItem>
                     )}
                   />
-                  <Button type="submit">Send Message</Button>
-                <ToastViewport
-                  className="absolute bottom-full mb-4 w-full max-w-md left-1/2 transform -translate-x-1/2"
-                />
-                <Toast variant="destructive" open={open} onOpenChange={setOpen}>
-                <ToastTitle>Message sent!</ToastTitle>
-                <ToastDescription>Thank you for your message. I&apos;ll get back to you soon.</ToastDescription>
-                <ToastClose><X /></ToastClose>
-              </Toast>
+                  <Button type="submit" onClick={
+                    () => toast({
+                      title: "Message Sent! 🚀",
+                      description: "I'll get back to you as soon as possible. Thanks!"
+                    })
+                  }>Send Message</Button>
                 </form>
-            </ToastProvider>
               </Form>
             </CardContent>
           </Card>

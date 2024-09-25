@@ -5,6 +5,7 @@ import { ModeToggle } from "@/components/mode-toggle";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "Jakub Muszynski - Personal Website",
@@ -55,6 +56,7 @@ export default function RootLayout({
             <main className="flex-grow">
               {children}
             </main>
+            <Toaster />
             <footer className="container mx-auto px-4 py-6 flex justify-between items-center">
               <div>© {new Date().getFullYear()} Jakub Muszynski</div>
               <div className="space-x-4">
