@@ -45,12 +45,14 @@ export function ContactPage() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
+      const csrfToken = document.cookie.split('; ').find(row => row.startsWith('csrfToken='))?.split('=')[1];
+      
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(values),
+        body: JSON.stringify({ ...values, csrfToken }),
       });
   
       if (response.ok) {

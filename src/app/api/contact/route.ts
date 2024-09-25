@@ -5,9 +5,16 @@ import { emailTemplateHtml } from "@/lib/email-template";
 sendgrid.setApiKey(process.env.SENDGRID_API_KEY as string);
 
 export async function POST(req: NextRequest) {
+  const csrfToken = req.cookies.get('csrfToken')?.value;
   const body = await req.json();
-  
-  const { message, email, name } = body;
+
+  const clientToken = body.csrfToken?.toString();
+
+  if (csrfToken !== clientToken) {
+    return NextResponse.json({ error: 'Invalid CSRF token' }, { status: 403 });
+  }
+
+  const { name, email, message } = body;
 
   if (!message || !email || !name) {
     console.error("Missing required fields");
