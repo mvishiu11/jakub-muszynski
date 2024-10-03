@@ -13,11 +13,12 @@ Welcome to the source code for my personal website, built with **Next.js**, **Sh
 - **Framework**: [Next.js](https://nextjs.org/) for building the frontend and backend logic of the website.
 - **UI Components**: [Shadcn](https://shadcn.dev/) for design consistency and reusable components.
 - **Hosting**: [Vercel](https://vercel.com/) for seamless deployment with automatic builds and previews.
-- **APIs**: GitHub and WakaTime integrations to showcase real-time project and coding stats.
+- **Emails**: [Sendgrid](https://sendgrid.com/en-us) is used for scalable and sender-safe delivery of emails from the contact form.
+- **APIs**: GitHub and WakaTime integrations to showcase real-time project and coding stats. Also a custom API endpoint for sending emails via Sendgrid.
 - **Styling**: Tailwind CSS for responsive and modern UI/UX design.
 
 ## **Project Structure**
-- `src/app/`: Main directory containing the pages, including the home, projects, and contact pages.
+- `src/app/`: Main directory containing the pages and APIs, including the home, projects, and contact pages.
 - `src/components/`: Reusable React components like navigation bars, footers, and the stats display.
 - `public/`: Static assets like images (including the favicon).
 - `next.config.mjs`: Configuration file for custom Next.js settings (including external images and SVGs).
@@ -66,9 +67,7 @@ Once deployed, Vercel will provide a live URL to access your personal website.
 Contributions and suggestions are welcome! Feel free to submit issues or open pull requests.
 
 ## **Future Improvements**
-- Full email integration for the contact form.
+- Full email integration for the contact form. (DONE)
 - Embed project demos for interactive previews.
-- More advanced stats integration (GitHub contributions over time, language usage charts).
+- More advanced stats integration (GitHub contributions over time, language usage charts). (DONE)
 - Blog section to share technical knowledge and project updates.
-
-Let me know if you'd like any additional sections or specific changes!
