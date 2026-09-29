@@ -1,73 +1,27 @@
-# Personal Website
+# jakub-muszynski
 
-Welcome to the source code for my personal website, built with **Next.js**, **Shadcn**, and **Vercel**. This site is designed to showcase my technical skills, projects, and professional background. It includes dynamic features such as GitHub stats, WakaTime integration, and the potential for future blog entries and project updates. You can visit the live site [here](https://jakub-muszynski-kby3.vercel.app/).
+Personal site of Jakub Muszyński. One page, fully static, three runtime dependencies (Next.js, React, React DOM).
 
-## **Features**
-- **Projects Section**: Display of my key projects with detailed descriptions, technologies used, and future support for embedded live demos.
-- **GitHub & WakaTime Stats**: Real-time coding activity and contributions from GitHub and WakaTime.
-- **Dark/Light Mode Toggle**: Seamless switching between dark and light themes to suit user preferences.
-- **Contact Page**: A form to get in touch, with social media links and options to send messages (email integration coming soon).
-- **Blog Section** (optional): A future addition for sharing insights, project updates, and technical articles.
+## Edit content
 
-## **Technologies Used**
-- **Framework**: [Next.js](https://nextjs.org/) for building the frontend and backend logic of the website.
-- **UI Components**: [Shadcn](https://shadcn.dev/) for design consistency and reusable components.
-- **Hosting**: [Vercel](https://vercel.com/) for seamless deployment with automatic builds and previews.
-- **Emails**: [Sendgrid](https://sendgrid.com/en-us) is used for scalable and sender-safe delivery of emails from the contact form.
-- **APIs**: GitHub and WakaTime integrations to showcase real-time project and coding stats. Also a custom API endpoint for sending emails via Sendgrid.
-- **Styling**: Tailwind CSS for responsive and modern UI/UX design.
+Everything you'd change lives in `src/data/site.ts`: roles, publications, projects, timeline, links. The logo is `src/components/Logo.tsx` (header) and `src/app/icon.svg` (favicon). Colours and type are tokens at the top of `src/app/globals.css`.
 
-## **Project Structure**
-- `src/app/`: Main directory containing the pages and APIs, including the home, projects, and contact pages.
-- `src/components/`: Reusable React components like navigation bars, footers, and the stats display.
-- `public/`: Static assets like images (including the favicon).
-- `next.config.mjs`: Configuration file for custom Next.js settings (including external images and SVGs).
+## Run locally
 
-## **Setup Instructions**
-
-### **Prerequisites**
-- [Node.js](https://nodejs.org/en/download/) (v14 or higher)
-- [npm](https://www.npmjs.com/get-npm)
-
-### **1. Clone the repository**
-```bash
-git clone https://github.com/YOUR_GITHUB_USERNAME/personal-website.git
-cd personal-website
-```
-
-### **2. Install dependencies**
 ```bash
 npm install
+npm run dev      # http://localhost:3000
+npm run build    # static site in ./out
 ```
 
-### **3. Run the development server**
-Start the Next.js development server:
+## Deploy
 
-```bash
-npm run dev
-```
+`next build` produces plain HTML/CSS/JS in `out/`, so any static host works.
 
-The website will now be running locally at [http://localhost:3000](http://localhost:3000).
+**Vercel** (current): import the repo, framework preset Next.js, no settings needed. Every push to `main` redeploys.
 
-### **4. Deploying to Production**
-To deploy the site, Vercel is recommended for automatic builds and previews. You can easily deploy with:
+**GitHub Pages**: Settings → Pages → Source: **GitHub Actions**. `.github/workflows/pages.yml` builds and deploys on every push to `main`. The site appears at `https://mvishiu11.github.io/jakub-muszynski/`; the workflow sets the sub-path automatically, and drops it if you add a custom domain.
 
-```bash
-vercel
-```
+**Cloudflare**: create a Workers/Pages project from the repo, build command `npm run build`, output directory `out`.
 
-Once deployed, Vercel will provide a live URL to access your personal website.
-
-## **Customizations**
-- **Adding New Projects**: Projects are managed in the `src/pages/projects` directory. You can add or update projects by modifying or adding files in this directory.
-- **Blog Integration** (Optional): If you choose to add a blog, you can create Markdown or MDX files for posts. Blog posts will be rendered dynamically on the blog page.
-- **GitHub & WakaTime Stats**: API keys for GitHub and WakaTime integrations can be configured in the environment variables or directly in the fetch requests within the components.
-
-## **Contributing**
-Contributions and suggestions are welcome! Feel free to submit issues or open pull requests.
-
-## **Future Improvements**
-- Full email integration for the contact form. (DONE)
-- Embed project demos for interactive previews.
-- More advanced stats integration (GitHub contributions over time, language usage charts). (DONE)
-- Blog section to share technical knowledge and project updates.
+Once you pick a host, set `site.url` in `src/data/site.ts` so canonical URLs and the sitemap point at it.

@@ -1,72 +1,45 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
-import { ModeToggle } from "@/components/mode-toggle";
-import Link from "next/link";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { Toaster } from "@/components/ui/toaster";
+import { site } from "@/data/site";
+import { themeScript } from "@/components/ThemeToggle";
 
 export const metadata: Metadata = {
-  title: "Jakub Muszynski - Personal Website",
-  description: "Personal website of Jakub Muszynski, a software engineer based in Warsaw.",
-  icons: {
-    icon: "/personal_logo.png",
+  metadataBase: new URL(site.url),
+  title: site.name,
+  description: site.description,
+  openGraph: {
+    title: site.name,
+    description: site.description,
+    url: site.url,
+    siteName: site.name,
+    locale: "en_US",
+    type: "profile",
   },
+  twitter: { card: "summary", title: site.name, description: site.description },
+  alternates: { canonical: "/" },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#F2F3EE" },
+    { media: "(prefers-color-scheme: dark)", color: "#101417" },
+  ],
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem={true} 
-        >
-          <div className="flex flex-col min-h-screen">
-            <header className="container mx-auto px-4 py-6 flex justify-between items-center">
-              <Link href="/" className="text-2xl font-bold">
-                <Image src="/personal_logo.png" 
-                       alt="Logo" 
-                       width={75} 
-                       height={75}
-                       className="rounded-full mx-auto" />
-              </Link>
-              <nav className="flex items-center space-x-4">
-                <Link href="/" passHref>
-                  <Button variant="ghost">Home</Button>
-                </Link>
-                <Link href="/projects" passHref>
-                  <Button variant="ghost">Projects</Button>
-                </Link>
-                <Link href="/about" passHref>
-                  <Button variant="ghost">About Me</Button>
-                </Link>
-                <Link href="/contact" passHref>
-                  <Button variant="ghost">Contact</Button>
-                </Link>
-                <ModeToggle />
-              </nav>
-            </header>
-            <main className="flex-grow">
-              {children}
-            </main>
-            <Toaster />
-            <footer className="container mx-auto px-4 py-6 flex justify-between items-center">
-              <div>© {new Date().getFullYear()} Jakub Muszynski</div>
-              <div className="space-x-4">
-                <a href="https://linkedin.com/in/jakub-muszyński-51133a273" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                <a href="https://github.com/mvishiu11" target="_blank" rel="noopener noreferrer">GitHub</a>
-              </div>
-            </footer>
-          </div>
-        </ThemeProvider>
-      </body>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+        />
+      </head>
+      <body>{children}</body>
     </html>
-  )
+  );
 }
