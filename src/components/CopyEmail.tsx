@@ -3,13 +3,13 @@
 import { useState } from "react";
 
 export function CopyEmail({ email }: { email: string }) {
-  const [label, setLabel] = useState("Copy address");
+  const [label, setLabel] = useState("Copy");
   const copy = async () => {
     try {
       await navigator.clipboard.writeText(email);
       setLabel("Copied");
     } catch {
-      const el = document.getElementById("addr");
+      const el = document.getElementById("mail");
       if (el) {
         const r = document.createRange();
         r.selectNodeContents(el);
@@ -17,18 +17,14 @@ export function CopyEmail({ email }: { email: string }) {
         s?.removeAllRanges();
         s?.addRange(r);
       }
-      setLabel("Selected, press Ctrl+C");
+      setLabel("Selected");
     }
-    setTimeout(() => setLabel("Copy address"), 1600);
+    setTimeout(() => setLabel("Copy"), 1800);
   };
   return (
-    <div className="mail">
-      <a href={`mailto:${email}`} className="addr-link">
-        <code id="addr">{email}</code>
-      </a>
-      <button className="copy" type="button" onClick={copy}>
-        {label}
-      </button>
-    </div>
+    <>
+      <a id="mail" href={`mailto:${email}`} style={{ textDecoration: "none" }}>{email}</a>
+      <button className="copy" type="button" onClick={copy}>{label}</button>
+    </>
   );
 }

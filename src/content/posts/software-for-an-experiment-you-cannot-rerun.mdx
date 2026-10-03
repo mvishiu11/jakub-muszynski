@@ -1,0 +1,51 @@
+export const meta = {
+  no: "JM-N-002",
+  title: "Software for an experiment you cannot rerun",
+  dek: "What a year of writing C++ for the ALICE detector taught me about correctness.",
+  tag: "Engineering",
+  claim: "In physics software, being correct today is not enough. The code has to notice when the instrument underneath it changes.",
+  date: "2026-10-03",
+  draft: true,
+};
+
+A lead–lead collision in the LHC is over almost before it begins, and it happens exactly once. ALICE was upgraded to record them continuously at interaction rates of up to 50 kHz.<sup>1</sup> If something upstream was miscalibrated while that happened, the data is not wrong in an obvious way. It is quietly, plausibly wrong, and you cannot go back for another copy.
+
+From July 2025 to September 2026 I wrote production C++ for ALICE's online quality-control system, the software that watches data as it is being taken and tells people on shift whether to trust it. My corner was FIT, the Fast Interaction Trigger: the detector that tells the rest of the experiment that a collision happened, when, and roughly how violent it was.<sup>1</sup>
+
+## The river problem
+
+<Quote source={<>Heraclitus, as reported by Plato in the <i>Cratylus</i><sup>2</sup></>}>"You cannot step twice into the same river."</Quote>
+
+Detectors age. Photodetectors lose gain as they accumulate charge, so the same particle produces a smaller signal in month nine than in month one. Nothing breaks. The numbers just drift, slowly enough that every individual run looks fine.
+
+The fix is to give the detector a ruler it cannot fake. A minimum ionising particle, a MIP, deposits a well-known amount of energy, so its peak in the amplitude spectrum is a natural unit. FT0, one of FIT's sub-detectors, sees roughly 14 ADC counts per MIP.<sup>1</sup> Track where that peak sits over time and you are tracking the instrument itself. That is what the aging monitor and the ADC-to-MIP calibration workflows I worked on do: they turn "is the detector still the detector we calibrated?" from a question someone remembers to ask into a plot someone sees every shift.
+
+## Rebuilding the ship at sea
+
+<Quote source={<>Otto Neurath, "Protocol Sentences," 1932<sup>3</sup></>}>"We are like sailors who must rebuild their ship on the open sea, never able to dismantle it in dry-dock and reconstruct it from the best materials."</Quote>
+
+Neurath meant knowledge. It describes running experiments just as well. You do not stop ALICE to refactor its monitoring. Changes go into a system that is taking data, used by people who were not in the room when you made them. Three habits followed from that.
+
+- **Monitor the instrument, not only the data.** A clean distribution from a drifting detector is the most dangerous plot in the building.
+- **Treat calibration as data.** It is versioned, it has provenance, and it is wrong in ways you will want to reconstruct later.
+- **Write for the person on shift at 3 a.m.** If a check needs an expert to interpret it, it is a research question, not a check.
+
+That last point is why we also proposed an AI assistant for FIT operators, accepted at MIDI 2025.<sup>4</sup> Not to replace the expert, but to make the expert's knowledge available at the hour when they are asleep.
+
+Most software gets to assume the world holds still. Physics software doesn't, and I suspect it is right more often for exactly that reason.
+
+<Open>
+
+- Can aging be predicted from operating history, so the monitor warns before the drift instead of after?
+- How do you test quality-control code against failures that have not happened yet?
+
+</Open>
+
+<Notes>
+
+1. ALICE FIT Collaboration, "ALICE Fast Interaction Trigger Upgrade," [arXiv:2503.05518](https://arxiv.org/abs/2503.05518), 2025.
+2. Plato, *Cratylus* 402a; Heraclitus fr. B91 (Diels–Kranz).
+3. O. Neurath, "Protokollsätze," *Erkenntnis* 3 (1932/33). Translations vary; this follows the standard English rendering.
+4. I. Mermer, J. Muszyński, J. Możaryn, K. Rosłon, "Proposal of an AI-Based Support Assistant for the ALICE-FIT Detector Setup at CERN," MIDI 2025. [arXiv:2511.17154](https://arxiv.org/abs/2511.17154)
+
+</Notes>

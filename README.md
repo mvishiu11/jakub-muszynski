@@ -4,7 +4,11 @@ Personal site of Jakub Muszyński. One page, fully static, three runtime depende
 
 ## Edit content
 
-Everything you'd change lives in `src/data/site.ts`: roles, publications, projects, timeline, links. The logo is `src/components/Logo.tsx` (header) and `src/app/icon.svg` (favicon). Colours and type are tokens at the top of `src/app/globals.css`.
+- Home page: `src/data/site.ts` (roles, work, research, projects, recognition, links).
+- Posts: one MDX file per post in `src/content/posts/`, starting with `export const meta = {...}`. Register it with one line in `src/content/index.ts`.
+- Drafts: `draft: true` in `meta` keeps a post out of search engines, the sitemap and RSS while it stays reachable by link. Set it to `false` to publish.
+- In posts you can use `<Quote source={...}>`, `<Open>` (open questions) and `<Notes>` (references) without importing anything.
+- Colours and type are tokens at the top of `src/app/globals.css`; the favicon is `src/app/icon.svg`.
 
 ## Run locally
 

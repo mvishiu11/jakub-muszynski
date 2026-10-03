@@ -1,0 +1,69 @@
+export const meta = {
+  no: "JM-N-001",
+  title: "Explaining a model that listens",
+  dek: "On Shapley values for speech, and why the hardest part is choosing who gets to play.",
+  tag: "Explainable AI",
+  claim: "When a model hears speech, the honest unit of explanation is the word, not the audio frame. Choosing it is also what makes Shapley values affordable.",
+  date: "2026-10-03",
+  draft: true,
+};
+
+"Transcribe the audio."
+
+Give a speech-language model that instruction and a three-second clip, and it will produce text. The question I care about comes before whether the text is right: what drove the answer? The sound itself, or the instruction that told the model what to expect?
+
+Shapley values are the principled way to ask. Lloyd Shapley introduced them in 1953 to split the payoff of a cooperative game among its players, and they are the only rule that satisfies a short list of fairness axioms: the contributions add up to the whole, identical players get identical credit, a player who changes nothing gets nothing, and values for combined games add.<sup>1</sup> Replace players with input features and payoff with the model's output, and you have the backbone of most modern feature attribution.
+
+## The price of fairness
+
+A player's Shapley value is its average marginal contribution over every coalition of the other players. With *n* players there are 2<sup className="e">n</sup> coalitions. For a short text prompt, sampling estimators make that tractable. For audio, the encoder emits around 50 frames per second, so a three-second utterance is already 150 frames.
+
+<figure className="tbl">
+  <div className="tbl-wrap">
+    <table>
+      <thead><tr><th>PLAYERS</th><th>COUNT, 3 s CLIP</th><th>COALITIONS</th></tr></thead>
+      <tbody>
+        <tr><td>Audio frames, 50 per second</td><td>150</td><td>2<sup>150</sup> ≈ 1.4 × 10<sup>45</sup></td></tr>
+        <tr><td>Words</td><td>≈ 8</td><td className="hi">2<sup>8</sup> = 256</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <figcaption>Fig. 1 | The same clip, two choices of player. Eight words assumes speech at about 150 words per minute. The instruction's text tokens join the game too.</figcaption>
+</figure>
+
+No amount of clever sampling makes 10<sup className="e">45</sup> feel small. The usual move is to sample harder. I think the better move is to ask whether we picked the right game.
+
+## If a lion could talk
+
+<Quote source={<>Ludwig Wittgenstein, <i>Philosophical Investigations</i><sup>2</sup></>}>"If a lion could talk, we could not understand him."</Quote>
+
+An attribution over 150 frames is the lion talking. Each frame is a twenty-millisecond slice of spectrum. Telling a person that frame 87 mattered is precise and useless, because nobody hears frame 87. People hear words.
+
+That is the idea behind mllm-shap.<sup>3</sup> The trick: before computing attributions, group the dense audio frames into word-aligned phonetic segments. The game becomes small enough to estimate well, and the answer comes back in units a person can read: this word in the audio, that word in the instruction. On LFM2-Audio-1.5B, on a single consumer GPU, this reached over 90% accuracy at 15% of the sampling budget, with about 43 times fewer model evaluations per sample.
+
+## Is that cheating?
+
+The fair objection: grouping frames throws information away, so the result is an approximation of the "real" frame-level values.
+
+I don't think there is a real, player-free Shapley value to approximate. The definition starts with a set of players. Change the set and you have asked a different question, with its own exact answer. Frame-level attribution answers a question about the encoder's internals. Word-level attribution answers the question a user actually asked. Neither is the other's approximation.
+
+The hard part moves elsewhere: to find the words, you need to know where each one starts and stops in the signal. That alignment problem is the subject of our follow-up, SGPA, which uses the spectrogram itself to place the boundaries.<sup>4</sup>
+
+Every explanation answers a question someone chose. The least we can do is choose one a person would ask.
+
+<Open>
+
+- Words are the right unit for speech. What is the right unit for music, or for a cough?
+- Sarcasm lives between the words, in timing and pitch. Can a word-level game see it at all?
+- The same word said twice is two players. Should symmetry treat them as one?
+
+</Open>
+
+<Notes>
+
+1. L. S. Shapley, "A Value for n-Person Games," in *Contributions to the Theory of Games II*, Princeton University Press, 1953.
+2. L. Wittgenstein, *Philosophical Investigations*, 1953. Part II, xi (§327 of "Philosophy of Psychology: A Fragment" in the 4th edition).
+3. J. Muszyński, P. Pozorski, M. Ganzha, "mllm-shap," ACL 2026 System Demonstrations, pp. 387–396. [aclanthology.org/2026.acl-demo.38](https://aclanthology.org/2026.acl-demo.38/)
+4. P. Pozorski, J. Muszyński, M. Ganzha, "SGPA," [arXiv:2603.02250](https://arxiv.org/abs/2603.02250), 2026.
+
+</Notes>

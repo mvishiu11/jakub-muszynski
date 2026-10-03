@@ -1,3 +1,5 @@
+import createMDX from "@next/mdx";
+
 /**
  * Fully static site: `next build` writes plain HTML/CSS/JS to ./out.
  * The same output deploys to Vercel, GitHub Pages, Cloudflare or any static host.
@@ -14,7 +16,10 @@ const nextConfig = {
   basePath,
   trailingSlash: true,
   images: { unoptimized: true },
+  pageExtensions: ["ts", "tsx", "mdx"],
   env: { NEXT_PUBLIC_BASE_PATH: basePath },
 };
 
-export default nextConfig;
+const withMDX = createMDX({});
+
+export default withMDX(nextConfig);

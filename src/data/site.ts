@@ -1,132 +1,139 @@
-// All site content lives here. Edit this file; the page re-renders from it.
+// Home-page content. Posts live in src/content/posts.
 
 export const site = {
   name: "Jakub Muszyński",
   url: "https://jakub-muszynski.vercel.app",
   description:
-    "Co-founder and CTO of EnergyScope, software engineer at Point72, and explainable-AI researcher at Warsaw University of Technology.",
+    "Engineer and founder in Warsaw. Hard things, done right: detector software, model inference, risk systems, and companies of my own.",
   email: "jakub.m.muszynski@gmail.com",
   links: {
-    linkedin: "https://linkedin.com/in/jakub-muszyński-51133a273",
     github: "https://github.com/mvishiu11",
-    acl: "https://aclanthology.org/2026.acl-demo.38/",
+    linkedin: "https://linkedin.com/in/jakub-muszyński-51133a273",
+    orcid: "https://orcid.org/0009-0000-2797-6044",
   },
-  eyebrow: ["Engineer", "Founder", "Researcher", "Warsaw"],
-  nowLabel: "Autumn 2026",
 };
 
-export type Link = { label: string; href: string };
+export type Entry = { when: string; title: string; sub: string; body: string };
 
-export const now = [
+export const now: Entry[] = [
   {
-    role: "Co-founder, CTO",
-    live: true,
+    when: "2025–",
     title: "EnergyScope",
-    href: "https://energyscope.eu",
-    body: "An AI energy operator for commercial and industrial sites in Poland. Our EnergyConnect device reads the plant, a digital twin plans it, and we get paid a share of the savings we verify. I lead the product, the edge hardware and the optimisation stack.",
+    sub: "Co-founder, CTO",
+    body: "An AI energy operator for Polish factories. I lead the edge hardware, the forecasting platform and the battery dispatch behind it.",
   },
   {
-    role: "Software Engineer",
-    title: "Point72 | Risk Technology",
-    body: "Building risk infrastructure in Warsaw. Earlier, as an intern, I built agentic AI systems for quantitative research.",
+    when: "2025–",
+    title: "Point72",
+    sub: "Software Engineer, Risk Technology",
+    body: "Production systems across risk, quantitative research and trading, where latency and correctness both matter. Joined as an intern, full-time since January 2026.",
   },
   {
-    role: "M.Sc. student",
-    title: "Warsaw University of Technology | MiNI",
-    body: "Individual studies track with Prof. Maria Ganzha. Research direction: digital twins of real industrial sites, with explanations built into every decision the twin makes.",
-  },
-];
-
-export const publications: {
-  venue: string;
-  kind: string;
-  title: string;
-  body: string;
-  links?: Link[];
-}[] = [
-  {
-    venue: "ACL 2026",
-    kind: "System Demos",
-    title:
-      "mllm-shap: A Shapley Value Explainability Platform for Text-Audio Multimodal Large Language Models",
-    body: "Muszyński, Pozorski, Ganzha, Paprzycki. Which words and which stretches of audio made the model answer the way it did. Presented in San Diego.",
-    links: [
-      { label: "Paper", href: "https://aclanthology.org/2026.acl-demo.38/" },
-      { label: "PyPI", href: "https://pypi.org/project/mllm-shap/" },
-      { label: "Code", href: "https://github.com/Pawlo77/MLLM-Shap" },
-    ],
-  },
-  {
-    venue: "arXiv 2026",
-    kind: "Preprint",
-    title: "SGPA: Spectrogram-Guided Phonetic Alignment",
-    body: "Pozorski, Muszyński, Ganzha. Aligning attributions to phonemes using the spectrogram itself.",
-    links: [{ label: "arXiv 2603.02250", href: "https://arxiv.org/abs/2603.02250" }],
-  },
-  {
-    venue: "BDA 2025",
-    kind: "Springer",
-    title: "EnergyTwin: A Multi-Agent System for Simulating and Coordinating Energy Microgrids",
-    body: "Agents for generation, storage and load negotiate a microgrid's schedule. The research root of EnergyScope's digital twin.",
-    links: [
-      { label: "Paper", href: "https://link.springer.com/chapter/10.1007/978-3-032-23241-0_10" },
-      { label: "arXiv", href: "https://arxiv.org/abs/2511.20590" },
-    ],
-  },
-  {
-    venue: "B.Sc. 2026",
-    kind: "Thesis",
-    title: "Bridging Traditional Explainability Methods and Multimodal Multilingual Models",
-    body: "Warsaw University of Technology. Graded 5.0, graduated with highest honours.",
+    when: "2026–",
+    title: "Warsaw University of Technology",
+    sub: "M.Sc., individual studies",
+    body: "With Prof. Maria Ganzha. Digital twins of real industrial sites, with explanations built into every decision the twin makes.",
   },
 ];
 
-// Illustrative word-level Shapley values for the research widget.
-export const attribution: [string, number][] = [
-  ["I", 0.02], ["was", 0.01], ["charged", 0.62], ["twice", 0.48], ["for", -0.03],
-  ["the", 0.0], ["same", 0.21], ["order,", 0.15], ["please", -0.08], ["fix", 0.34], ["it", 0.05],
-];
-
-export const built: {
-  tag: string;
-  meta: string;
-  title: string;
-  href?: string;
-  body: string;
-  extra?: Link;
-}[] = [
+export const work: Entry[] = [
   {
-    tag: "Edge hardware",
-    meta: "EnergyScope",
-    title: "EnergyConnect",
-    body: "Industrial gateway that reads meters, inverters and batteries over Modbus and streams them to the cloud through a zero-trust tunnel. Runs on low, medium and high voltage sites.",
+    when: "2025–26",
+    title: "CERN",
+    sub: "ALICE Experiment, Geneva",
+    body: "Associated Member of Personnel. Production C++ in the experiment's real-time data-quality system: aging monitoring and ADC-to-MIP calibration for the Fast Interaction Trigger, and its geometry in the event display.",
   },
   {
-    tag: "ML platform",
-    meta: "EnergyScope",
-    title: "Load and PV forecasting",
-    body: "Backtesting, fine-tuning and shadow deployment for site-level forecasts, the input every dispatch decision depends on.",
+    when: "2024",
+    title: "TSMC",
+    sub: "AI Application & Integration, Hsinchu",
+    body: "LLM inference with vLLM, tensor parallelism and CPU offloading. A full-stack defect-analysis tool built on fab data.",
   },
   {
-    tag: "Startup",
-    meta: "Founded 2023",
+    when: "2024–25",
     title: "MedWave",
-    body: "Medical transcription with AI. Grant-funded, incubated at WUT, top 16 at the Enactus World Cup in Bangkok.",
+    sub: "Co-founder, CTO",
+    body: "Clinical notes from speech: streaming recognition plus LLM summarisation. Funded by a university innovation grant, national Enactus champion, top 16 at the World Cup in Bangkok.",
   },
   {
-    tag: "Language",
-    meta: "Rust",
-    title: "RustyLox",
-    href: "https://github.com/mvishiu11/RustyLox",
-    body: "A tree-walking interpreter for Lox, with a browser playground.",
-    extra: { label: "Open the playground", href: "https://mvishiu11.github.io/rustylox-playground/" },
+    when: "2022–26",
+    title: "Warsaw University of Technology",
+    sub: "B.Sc. Computer Science",
+    body: "Highest honours, GPA 4.70 out of 5. Thesis on explainability for multimodal, multilingual models, graded 5.0.",
   },
 ];
 
-export const record = [
-  { year: "2026", title: "Enactus Poland national champions", body: "With EnergyScope. Representing Poland at the Enactus World Cup." },
-  { year: "2026", title: "B.Sc. Computer Science, highest honours", body: "Warsaw University of Technology, MiNI." },
-  { year: "2025", title: "Enactus World Cup, top 16", body: "With MedWave, Bangkok." },
-  { year: "2024", title: "TSMC | AI Application and Integration", body: "LLM inference on current-generation GPUs; agent systems for defect engineering." },
-  { year: "Earlier", title: "CERN | Software engineering", body: "Distributed systems in Rust." },
+export type Link = { label: string; href: string };
+export type Cell = { label: string; title: string; href?: string; body: string; links?: Link[] };
+
+export const research: Cell[] = [
+  {
+    label: "ACL 2026 | System Demonstrations",
+    title: "mllm-shap: A Shapley Value Explainability Platform for Text-Audio Multimodal Large Language Models",
+    href: "https://aclanthology.org/2026.acl-demo.38/",
+    body: "Muszyński, Pozorski, Ganzha. First author, presented in San Diego.",
+  },
+  {
+    label: "BDA 2025 | Springer LNCS",
+    title: "EnergyTwin: A Multi-Agent System for Simulating and Coordinating Energy Microgrids",
+    href: "https://link.springer.com/chapter/10.1007/978-3-032-23241-0_10",
+    body: "Muszyński, Walużenicz, Zan, Wrona, Ganzha, Paprzycki, Bădică. First and corresponding author.",
+  },
+  {
+    label: "MIDI 2025",
+    title: "Proposal of an AI-Based Support Assistant for the ALICE-FIT Detector Setup at CERN",
+    href: "https://arxiv.org/abs/2511.17154",
+    body: "Mermer, Muszyński, Możaryn, Rosłon.",
+  },
+  {
+    label: "arXiv 2026 | Preprint",
+    title: "SGPA: Spectrogram-Guided Phonetic Alignment for Feasible Shapley Value Explanations in Multimodal Large Language Models",
+    href: "https://arxiv.org/abs/2603.02250",
+    body: "Pozorski, Muszyński, Ganzha.",
+  },
+];
+
+export const built: Cell[] = [
+  {
+    label: "Python | PyPI",
+    title: "mllm-shap",
+    body: "Shapley attributions for models that hear and read at once. Groups audio frames into words before playing the game.",
+    links: [
+      { label: "Code", href: "https://github.com/Pawlo77/MLLM-Shap" },
+      { label: "pip install mllm-shap", href: "https://pypi.org/project/mllm-shap/" },
+    ],
+  },
+  {
+    label: "Java, JADE | React",
+    title: "EnergyTwin",
+    body: "The multi-agent microgrid simulator behind the BDA paper: physical asset models, rolling-horizon planning, agents negotiating a schedule.",
+    links: [{ label: "Code", href: "https://github.com/mvishiu11/energy-twin" }],
+  },
+  {
+    label: "Rust | WebAssembly",
+    title: "RustyLox",
+    body: "A tree-walking interpreter for Lox, compiled to WebAssembly so it runs in your browser.",
+    links: [
+      { label: "Code", href: "https://github.com/mvishiu11/rustylox" },
+      { label: "Playground", href: "https://mvishiu11.github.io/rustylox-playground/" },
+    ],
+  },
+  {
+    label: "C",
+    title: "CoreLox",
+    body: "The same language again, as a bytecode virtual machine in C, with a few extensions the book leaves as exercises.",
+    links: [
+      { label: "Code", href: "https://github.com/mvishiu11/CoreLox" },
+      { label: "Why twice?", href: "/writing/writing-the-same-language-twice/" },
+    ],
+  },
+];
+
+export const recognition = [
+  { year: "2026", what: "Enactus Poland national champion, with EnergyScope. Representing Poland at the World Cup in Brazil." },
+  { year: "2025", what: "Enactus Poland national champion and World Cup top 16 in Bangkok, with MedWave." },
+  { year: "2025", what: "Personal commendation for MedWave from Krzysztof Gawkowski, Deputy Prime Minister and Minister of Digital Affairs." },
+  { year: "2025", what: "Full funding grant for the CERN internship, Warsaw University of Technology." },
+  { year: "2024", what: "150k PLN innovation grant, WUT Centre of Innovation." },
+  { year: "2023–", what: "Rector's Scholarship for the top 10% of the faculty." },
 ];
