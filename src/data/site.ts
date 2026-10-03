@@ -2,7 +2,7 @@
 
 export const site = {
   name: "Jakub Muszyński",
-  url: "https://jakub-muszynski.vercel.app",
+  url: "https://jakubmuszynski.eu",
   description:
     "Engineer and founder in Warsaw. Hard things, done right: detector software, model inference, risk systems, and companies of my own.",
   email: "jakub.m.muszynski@gmail.com",

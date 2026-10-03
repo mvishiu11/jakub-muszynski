@@ -22,7 +22,7 @@ npm run build    # static site in ./out
 
 `next build` produces plain HTML/CSS/JS in `out/`, so any static host works.
 
-**Vercel** (current): import the repo, framework preset Next.js, no settings needed. Every push to `main` redeploys.
+**Vercel** (current): production at https://jakubmuszynski.eu. Every push to `main` redeploys.
 
 **GitHub Pages**: Settings → Pages → Source: **GitHub Actions**. `.github/workflows/pages.yml` builds and deploys on every push to `main`. The site appears at `https://mvishiu11.github.io/jakub-muszynski/`; the workflow sets the sub-path automatically, and drops it if you add a custom domain.
 
