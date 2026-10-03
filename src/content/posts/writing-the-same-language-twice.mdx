@@ -1,0 +1,48 @@
+export const meta = {
+  no: "JM-N-003",
+  title: "Writing the same language twice",
+  dek: "A tree-walker in Rust, a bytecode machine in C, and what each one taught me about the other.",
+  tag: "Craft",
+  claim: "The fastest way to understand an abstraction is to build it twice, in two languages that disagree about what matters.",
+  date: "2026-10-03",
+  draft: true,
+};
+
+When Richard Feynman died in 1988, his Caltech blackboard said: "What I cannot create, I do not understand."<sup>1</sup> I like the sentence, but I think it undersells the second attempt. You understand something once you have built it. You understand *why* it is built that way once you have built it differently.
+
+So I implemented Lox, the small language from Robert Nystrom's *Crafting Interpreters*, twice.<sup>2</sup> First as RustyLox, a tree-walking interpreter in Rust. Then as CoreLox, a bytecode virtual machine in C.
+
+## The tree
+
+A tree-walker treats a program as what it means. The lexer is a small automaton, the parser is recursive descent, and evaluation is a walk over the syntax tree where every node knows how to compute itself. The code reads like the language specification, which is the point.
+
+Rust makes you pay for that clarity in one specific place: environments. Variables live in scopes, scopes nest, and the moment a scope must outlive the call that created it, Rust asks who owns it. Most of us answer `Rc<RefCell<Environment>>` with a faint sense of defeat. That friction is not Rust being difficult. It is Rust pointing at the exact spot where the language's semantics and its memory model meet.
+
+RustyLox also compiles to WebAssembly, so the interpreter runs [in your browser](https://mvishiu11.github.io/rustylox-playground/). That took an afternoon, and it remains the most satisfying afternoon of the project.
+
+## The tape
+
+A bytecode VM treats a program as what it does. The compiler flattens the tree into a linear chunk of instructions with a constants pool on the side, and a loop with a big `switch` executes them against a stack. Meaning disappears from the runtime entirely. What remains is speed.
+
+C makes you pay for that speed everywhere. Every growing array is a macro you wrote; every pointer is a promise you made. In exchange, nothing is hidden: you can see each byte the VM touches. I also added a few things the book leaves as exercises, `switch`, `break` and `continue`, because extending a language is the real test of whether you understood the one you were given.
+
+## Knowing how
+
+Gilbert Ryle distinguished *knowing that* from *knowing how*.<sup>3</sup> I knew that bytecode is faster than tree-walking. I knew how only after watching the same Lox program run on both, and seeing that the speed comes from erasing the very structure that made the first version readable.
+
+That trade shows up everywhere in my work since: interpretable versus efficient, the tree versus the tape. Building both, once, made it a choice instead of a default.
+
+<Open>
+
+- Would a third implementation, a compiler straight to WebAssembly, teach anything the first two didn't?
+- Is there a version of this exercise for machine learning: one model, implemented as interpretable rules and as a network?
+
+</Open>
+
+<Notes>
+
+1. The blackboard is preserved in the Caltech Archives; the photograph is widely reproduced.
+2. R. Nystrom, *Crafting Interpreters*, Genever Benning, 2021. [craftinginterpreters.com](https://craftinginterpreters.com)
+3. G. Ryle, *The Concept of Mind*, 1949, ch. 2, "Knowing How and Knowing That."
+
+</Notes>
