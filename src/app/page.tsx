@@ -46,9 +46,25 @@ function Cells({ items }: { items: Cell[] }) {
   );
 }
 
+// Structured data: tells search engines this page is about one person and which profiles are theirs.
+const personLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: site.name,
+  alternateName: "Jakub Muszynski",
+  url: site.url,
+  email: `mailto:${site.email}`,
+  jobTitle: "Engineer and founder",
+  description: site.description,
+  address: { "@type": "PostalAddress", addressLocality: "Warsaw", addressCountry: "PL" },
+  alumniOf: { "@type": "CollegeOrUniversity", name: "Warsaw University of Technology" },
+  sameAs: [site.links.linkedin, site.links.github, site.links.orcid, "https://aclanthology.org/people/jakub-muszynski/"],
+};
+
 export default function Home() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personLd) }} />
       <div className="hero">
         <div className="hero-main">
           <p className="label" style={{ margin: "0 0 20px" }}>Engineer | Founder | Researcher</p>
