@@ -20,7 +20,7 @@ export const now: Entry[] = [
     when: "2025–",
     title: "EnergyScope",
     sub: "Founder, Board Member",
-    body: "An AI energy operator for Polish factories, founded with Mikołaj Chwojnicki. We run strategy and the business together as a two-person board; I also lead engineering and our fundraising.",
+    body: "An AI energy operator for Polish factories. I decide where it goes and build what gets it there.",
   },
   {
     when: "2025–",
